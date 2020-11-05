@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>사슴에 관하여</title>
+</head>
+<body>
+    <input type="text" id="firstColor">
+    <input type="text" id="secondColor">
+    <input type="text" id="thirdColor">
+    <input type="button" value="change!" onclick="backgroundcolorChangeToColorTextinput()">
+    
+        <!-- <input type="button" onclick="red()">
+    <input type="button" onclick="orange()">
+    <input type="button" onclick="yellow()">
+    <input type="button" onclick="green()">
+    <input type="button" onclick="blue()">
+    <input type="button" onclick="purple()"> -->
+    <!-- 사슴에 관한 진실. -->
+</body>
+    <script>
+        function backgroundcolorChangeToColorTextinput() {
+            let firstColor1 = document.getElementById("firstColor");
+            let secondColor2 = document.getElementById("secondColor");
+            let thirdColor3 = document.getElementById("thirdColor");
+            //alert(typedColor.value);
+            
+            setInterval(() => document.body.style.background = firstColor1.value, 1000);
+            setInterval(() => document.body.style.background = secondColor2.value, 2000);
+            setInterval(() => document.body.style.background = thirdColor3.value, 3000);
+
+            // if(typedColor.value === "blue" || typedColor.value === "red" || typedColor.value === "yellow") {
+            //     alert(typedColor.value);
+            //     document.body.style.background = typedColor.value;
+            // } else {
+            //     alert('지원하지 않은 색입니다.');
+            // }
+            
+        }
+        
+        // function red() {
+        //     document.body.style.background = "red";
+        //     alert("red");
+        // }
+        // function orange() {
+        //     document.body.style.background = "orange";
+        //     alert("orange");
+        // }
+        // function yellow() {
+        //     document.body.style.background = "yellow";
+        //     alert("yellow");
+        // }
+        // function green() {
+        //     document.body.style.background = "green";
+        //     alert("green");
+        // }
+        // function blue() {
+        //     document.body.style.background = "blue";
+        //     alert("blue");
+        // }
+        // function purple() {
+        //     document.body.style.background = "purple";
+        //     alert("purple");
+        // }
+    </script>
+</html>
