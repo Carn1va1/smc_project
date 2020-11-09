@@ -1,0 +1,80 @@
+<!--# 1. AS 신청서를 만들어라
+# 2. 폼의 구성은 이름, 이메일, 제목, 설명으로 이루어진다
+# 3. 이름은 2~10글자 사이어야 한다
+# 4. 이메일은 @가 하나만 들어가있어야 한다
+# 5-1. 제목은 포멧을 "[분류] 제목명" 과 같은 포멧이어야 하며([] 가 들어가 있어야 함)
+       만약 올바른 포멧이 아니라면, "[분류] 제목명 과 같은 포멧으로 작성하여야 합니다" 라고 나와야 합니다
+   EX) [수리] 수리 요청드립니다 -> O
+   EX) [수리 수리 마수리~ -> X
+  5-2. 제출 버튼을 눌렀을때 자동으로 분류가 출력되어야 한다([] 사이의 문자)
+   EX) [수리] 수리 요청드립니다
+    -> alert("수리");
+# 6. 설명은 최대 100글자까지만 작성할수 있다
+# 7. 제출 버튼과 다시쓰기 버튼을 만들어야 합니다-->
+
+<html>
+    <body>
+        <p>이름</p>
+        <input type="text" id="name">
+        <p>이메일</p>
+        <input type="text" id="email">
+        <p>제목</p>
+        <input type="text" id="title">
+        <p>설명</p>
+        <input type="text" id="description">
+        <input type="button" value="제출">
+        <input type="button" value="다시쓰기">
+    </body>
+    <script>
+        function getCountOfStringInclude(target_string, find_string) {
+            let count = 0;
+            for (const char of target_string) {
+                if (char === find_string) {
+                    count ++;
+                }
+            }
+            return count;
+        }
+
+        function getMidTitleOfTitle(title) {
+            let isEnterMidTitleSection = false;
+            let returnString = "";
+            for (const char of title) {
+                if (char === "[") {
+                    isEnterMidTitleSection = true;
+                }
+                else if (char === "]") {
+                    return returnString;
+                }
+                else if (isEnterMidTitleSection) {
+                    returnString += char
+                }
+            }
+        }
+
+        function submit() {
+            const name = document.getElementById("name").value;
+            if (!(2 <= name.length && name.length <= 10)) {
+                alert("이름은 2 ~ 10 글자 사이여야 합니다")
+            }
+
+            const email = document.getElementById("email").value;
+            if (getCountOfStringInclude(email, "@") > 1) {
+                alert("@ 개수가 1개여야만 합니다")
+            }
+
+            const title = document.getElementById("title").value;
+            if (!(title.includes("[") && title.includes("]"))) {
+                alert("[분류] 제목명 과 같은 포멧으로 작성하여야 합니다")
+            }
+
+            alert(`${getMidTitleOfTitle(title)} 로 선택되었습니다!`);
+
+        }
+
+        function reset() {
+
+        }
+    </script>
+</html>
+
