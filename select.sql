@@ -249,3 +249,47 @@ WHERE
     PAYMENT_HISTORY.ID = PRODUCT.ID AND
     PRODUCT.CATEGORY_ID = CATEGORY.ID AND
     MEMBER.ID = PAYMENT_HISTORY.MEMBER_ID;
+
+-- COUNT, SUM, AVG, MIN, MAX
+-- 개수, 합, 평군, 최소, 최대 
+-- 예) SELECT SUM(PRICE) FROM PRODUCT;
+
+-- 문제 14.
+-- 모든 상품의 개수, 가격의 합, 가격의 평균, 가격의 최소, 가격의 최대값을 동시에 뽑아주세요
+SELECT
+    CATEGORY_ID,
+    COUNT(STOCK) AS 개수,
+    SUM(PRICE) AS 가격의_합,
+    AVG(PRICE) AS 가격의_평균,
+    MIN(PRICE) AS 가격의_최소,
+    MAX(PRICE) AS 가격의_최대
+FROM
+    PRODUCT
+GROUP BY
+    CATEGORY_ID;
+
+-- 구문의 순서
+-- SELECT
+-- FROM
+-- WHERE
+-- GROUP BY
+-- HAVING
+-- ORDER BY
+
+-- 문제 15.
+-- 모든 상품의 상품의 개수, 가격의 합, 가격의 평균, 가격의 최소, 가격의 최대값을 동시에 뽑아주세요
+-- 카테고리 별로 그룹핑하여 보여주세요 
+-- 다만, 그룹핑 하기 전의 상품의 가격이 1,000,000 넘는 상품은 제외해주세요
+SELECT
+    CATEGORY_ID,
+    COUNT(STOCK) AS 개수,
+    SUM(PRICE) AS 가격의_합,
+    AVG(PRICE) AS 가격의_평균,
+    MIN(PRICE) AS 가격의_최소,
+    MAX(PRICE) AS 가격의_최대
+FROM
+    PRODUCT
+WHERE
+    PRICE <= 10000000
+GROUP BY
+    CATEGORY_ID;
