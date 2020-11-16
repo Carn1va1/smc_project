@@ -74,18 +74,18 @@ WHERE
 -- 문제 5번을 푸신 후, PRODUCT 의 가격 != PAYMENT_HISTORY.ORDER_PRICE / PAYMNET_HISTORY.ORDER_COUNT 
 -- 인 값들을 찾으세요
 -- 5번으로 인해 가격이 다운된 상품들을 찾고, PAYMENT_HISTORY 에서 구한 단가로 비교하면 됩니다
-SELECT 
-    PAYMENT_HISTORY.ORDER_PRICE,
-    PAYMENT_HISTORY.ORDER_COUNT,
-    PAYMENT_HISTORY.ORDER_PRICE / PAYMENT_HISTORY.ORDER_COUNT AS "판매단가",
-    PRODUCT.PRICE,
-    PRODUCT.ID,
-    PRODUCT.NAME
-FROM
-    PAYMENT_HISTORY, PRODUCT
-WHERE 
-    PAYMENT_HISTORY.PRODUCT_ID = PRODUCT.ID AND
-    PAYMENT_HISTORY.ORDER_PRICE / PAYMENT_HISTORY.ORDER_COUNT != PRODUCT.PRICE
+    SELECT 
+        PAYMENT_HISTORY.ORDER_PRICE,
+        PAYMENT_HISTORY.ORDER_COUNT,
+        PAYMENT_HISTORY.ORDER_PRICE / PAYMENT_HISTORY.ORDER_COUNT AS "판매단가",
+        PRODUCT.PRICE,
+        PRODUCT.ID,
+        PRODUCT.NAME
+    FROM
+        PAYMENT_HISTORY, PRODUCT
+    WHERE 
+        PAYMENT_HISTORY.PRODUCT_ID = PRODUCT.ID AND
+        PAYMENT_HISTORY.ORDER_PRICE / PAYMENT_HISTORY.ORDER_COUNT != PRODUCT.PRICE
 
 -- 문제 7.
 -- CATEGORY, MEMBER, PAYMENT_HISTORY, PRODUCT 테이블을 모두 조인하여
@@ -162,4 +162,15 @@ ORDER BY
 -- PRODUCT 테이블에서 상품명, 상품 설명을 가져오게끔 합니다
 -- 만약 상품 설명이 10글자 이상인 경우 "탁월한 생산성을 위..." 와 같이 10글자 이후에는 ... 을 붙혀 주고
 -- 10글자 미만인 경우 모두 출력되게끔 합니다 (... 이 붙어서는 안됩니다)
--- oracle IF(https://coding-factory.tistory.com/451), SUBSTR(https://docs.oracle.com/cd/B19306_01/server.102/b14200/functions162.htm), ||(https://dpdpwl.tistory.com/80) 연산자 사용 필요
+-- oracle IF(https://gent.tistory.com/311), SUBSTR(https://docs.oracle.com/cd/B19306_01/server.102/b14200/functions162.htm), ||(https://dpdpwl.tistory.com/80) 연산자 사용 필요
+SELECT
+    product.name,
+    CASE
+        WHEN length(product.description) >= 10 THEN
+            substr(product.description, 1, 10)
+            || '...'
+        ELSE
+            description
+    END AS description
+FROM
+    product
